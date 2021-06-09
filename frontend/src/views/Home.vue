@@ -1,9 +1,11 @@
 <template>
   <div class="home">
     <div class="hero">
-      <h1>BIENVENU</h1>
+      <div class="txt-color">
+        <h1>BIENVENUE</h1>
+      </div>
     </div>
-    <h3>Ta sélection de films prefs</h3>
+    <h3>Popular</h3>
     <!-- <input v-model="movieName" placeholder="edit me" />
     <p>Message is: {{ movieName }}</p> -->
     <ul id="array-rendering">
@@ -70,9 +72,10 @@ export default {
 
 .hero h1 {
   font-family: "BebasNeue";
-  color: #a9cef4;
   letter-spacing: 1rem;
-  font-size: 8rem;
+  font-size: 10rem;
+  text-shadow: 4px 4px 2px rgb(0, 0, 0);
+
 }
 
 ul {
@@ -92,6 +95,7 @@ h1 {
 }
 
 h3 {
+  color: white;
   margin: 40px 0 0;
 }
 
