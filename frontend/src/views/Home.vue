@@ -75,7 +75,6 @@ export default {
   letter-spacing: 1rem;
   font-size: 10rem;
   text-shadow: 4px 4px 2px rgb(0, 0, 0);
-
 }
 
 ul {
