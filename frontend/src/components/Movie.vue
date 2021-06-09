@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     formatDate: function (myDate) {
-      return format(myDate, "EEEE,MMMM do, yyyy hh:mm a", { locale: fr });
+      return format(myDate, "d MMMM yyyy", { locale: fr });
     },
   },
 };
