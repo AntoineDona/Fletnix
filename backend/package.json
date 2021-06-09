@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "dotenv nodemon ./server.js",
+    "getDB":"dotenv node ./get_db.js",
     "start": "dotenv node ./server.js",
     "lint": "eslint . --fix"
   },
