@@ -17,6 +17,9 @@ async function run() {
     );
     console.log(i);
     for (const movie of response.data.results) {
+      const infos_movie = await axios.get(
+        `https://api.themoviedb.org/3/movie/` + movie.id + `?api_key=57359ff087905e870d40ba4880a1dce0`
+      );
       const newMovie = new movieModel({
         //crée un nouveau film et l'inserre dans la bdd
         id_mdb: movie.id,

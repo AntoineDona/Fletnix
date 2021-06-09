@@ -3,8 +3,20 @@ const mongoose = require("mongoose");
 const MovieSchema = new mongoose.Schema({
   id_mdb: { type: Number, required: true, unique: true },
   name: { type: String },
-  genre_idsm: { type: Array },
+  genres: { type: Array },
   release_date: { type: String },
+  backdrop_path: { type: String },
+  poster_path: { type: String },
+  original_language: { type: String },
+  overview: { type: String }
+  original_title: { type: String},
+  production_companies: { type: Array },
+  production_countries: { type: Array },
+  spoken_languages: { type: Array },
+  status: { type: String },
+  tagline: { type: String },
+  vote_average: { type: Number, required : true, unique : true}
+  vote_count: { type: Number, required : true, unique : true},
 });
 
 const movieModel = mongoose.model("movieModel", MovieSchema, "movies");
