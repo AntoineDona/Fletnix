@@ -1,16 +1,16 @@
 <template>
   <div class="film">
-    <div class="affiche">
-      <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" />
+    <!-- <div class="affiche"> -->
+    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path" />
+    <!-- </div> -->
+    <div class="title">
+      <h1 :title="movie.title">{{ movie.title }}</h1>
     </div>
-    <div class="infos">
-      <h1>{{ movie.title }}</h1>
-      <h3>
-        <!-- {{ moment(new Date(movie.release_date)).format("D MMMM YYYY") }} -->
+    <!-- <h3>
+        {{ moment(new Date(movie.release_date)).format("D MMMM YYYY") }}
         {{ formatDate(new Date(movie.release_date)) }}
-      </h3>
-      <!-- <p>{{ movie.overview }}</p> -->
-    </div>
+      </h3> -->
+    <!-- <p>{{ movie.overview }}</p> -->
   </div>
 </template>
 
@@ -35,23 +35,25 @@ export default {
 <style scoped>
 .film {
   display: flex;
-  width: 13rem;
+  width: 100%;
+  height: auto;
   align-items: center;
   flex-direction: column;
   background-color: white;
-  border: solid 1px rgba(0, 0, 0, 0.068);
-  border-radius: 0.5rem;
+  /* border-radius: 0.5rem; */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.404);
-  margin: 1rem 1rem;
   transition: all 0.2s ease;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
 }
 
 .affiche {
   align-self: center;
 }
-.affiche img {
+.film img {
   width: 100%;
-  border-radius: 0.5rem;
+  height: auto;
 }
 
 .infos {
@@ -62,13 +64,24 @@ export default {
   flex-direction: column;
 }
 
+.title {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  height: 2rem;
+  background-color: rgba(0, 0, 0, 0.377);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 h1 {
+  color: white;
   font-size: 1rem;
-  height: 2.4rem;
-  width: 12rem;
+  width: 100%;
   margin: auto;
-  padding: 0 0.4rem;
+  padding: 0 0.2rem;
   text-overflow: ellipsis;
+  white-space: nowrap;
   overflow: hidden;
 }
 
@@ -78,9 +91,10 @@ h3 {
 }
 
 .film:hover {
-  width: 13.5rem;
+  transform: scale(1.1);
   /* background-color: black;
   color: white; */
   transition: all 0.4s ease;
+  z-index: 1;
 }
 </style>

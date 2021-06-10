@@ -96,7 +96,6 @@ header {
   padding: 0.4rem 0.6rem;
   border-radius: 0.2rem;
   flex-wrap: nowrap;
-
 }
 
 .search_bar input {
