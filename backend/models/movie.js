@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
 const MovieSchema = new mongoose.Schema({
-  id_tmd: { type: Number, required: true, unique: true },
+  id: { type: Number, required: true, unique: true },
+  imdb_id: { type: String },
   name: { type: String },
   genres: { type: Array },
   release_date: { type: String },
@@ -17,6 +18,8 @@ const MovieSchema = new mongoose.Schema({
   tagline: { type: String },
   vote_average: { type: Number },
   vote_count: { type: Number },
+  adult: { type: Boolean },
+  revenue: { type: Number },
 });
 
 const movieModel = mongoose.model("movieModel", MovieSchema, "movies");

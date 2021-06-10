@@ -9,13 +9,27 @@ router.get("/", function (req, res) {
     .limit(parseInt(req.query.limit))
     .sort("-" + req.query.sort_by)
     .select(
-      "name release_date original_language overview poster_path backdrop_path status vote_average vote_count"
+      "id _id name release_date original_language overview poster_path backdrop_path status vote_average vote_count"
     )
     .then(function (movies) {
       res.json(movies);
       console.log("ok");
     });
 });
+
+router.get("/movie/", function (req, res) {
+  console.log(req.query);
+  movieModel
+    .findOne({ _id: req.query.id })
+    .select(
+      "_id name release_date original_language overview poster_path backdrop_path status vote_average vote_count"
+    )
+    .then(function (movie) {
+      res.json(movie);
+      console.log("ok");
+    });
+});
+
 router.post("/new", function (req, res) {
   res.send("POST bien reçu");
   console.log(req.body);

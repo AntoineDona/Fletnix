@@ -9,7 +9,7 @@ mongoose.connect(process.env.MONGO_DB_URL, {
 });
 
 async function run() {
-  for (let i = 2; i < 441; i++) {
+  for (let i = 368; i < 441; i++) {
     //jusqu a 441
     const response = await axios.get(
       `https://api.themoviedb.org/3/movie/popular?api_key=57359ff087905e870d40ba4880a1dce0` +
@@ -25,7 +25,8 @@ async function run() {
       );
       const newMovie = new movieModel({
         //crée un nouveau film et l'inserre dans la bdd
-        id_tmd: infos_movie.data.id,
+        id: infos_movie.data.id,
+        imdb_id: infos_movie.data.imdb_id,
         name: infos_movie.data.title,
         release_date: infos_movie.data.release_date,
         genres: infos_movie.data.genres,
@@ -41,6 +42,8 @@ async function run() {
         tagline: infos_movie.data.tagline,
         vote_average: infos_movie.data.vote_average,
         vote_count: infos_movie.data.vote_count,
+        adult: infos_movie.data.adult,
+        revenue: infos_movie.data.revenue,
       });
 
       newMovie.save().then(function () {});
