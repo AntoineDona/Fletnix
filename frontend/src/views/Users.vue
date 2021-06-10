@@ -1,40 +1,42 @@
 <template>
-  <h1>Users</h1>
-  <UsersTable v-if="users.length" :users="users" />
-  <div v-if="usersLoadingError">{{ usersLoadingError }}</div>
+  <MovieDetails :movie="movie" />
 </template>
 
 <script>
 // @ is an alias to /src
-import UsersTable from "@/components/UsersTable.vue";
+import MovieDetails from "@/components/MovieDetails.vue";
 import axios from "axios";
 
 export default {
   name: "Users",
   components: {
-    UsersTable,
+    MovieDetails,
   },
   data: function () {
     return {
-      users: [],
-      usersLoadingError: "",
+      movie: {},
+      movieLoadingError: "",
     };
   },
   methods: {
-    fetchUsers: function () {
+    fetchMovie: function () {
       axios
-        .get(`${process.env.VUE_APP_BACKEND_BASE_URL}/users`)
+        .get(
+          `https://api.themoviedb.org/3/movie/337404?api_key=57359ff087905e870d40ba4880a1dce0`
+        )
         .then((response) => {
-          this.users = response.data.users;
+          this.movie = response.data.results;
+          console.log(this.movie);
         })
         .catch((error) => {
-          this.usersLoadingError = "An error occured while fetching users.";
+          this.movieLoadingError = "An error occured while fetching movies.";
           console.error(error);
         });
     },
   },
-  mounted: function () {
-    this.fetchUsers();
+  created() {
+    console.log("count is: " + this.movieName);
+    this.fetchMovies();
   },
 };
 </script>

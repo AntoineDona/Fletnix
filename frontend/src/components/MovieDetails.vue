@@ -1,16 +1,11 @@
 <template>
   <div class="film">
-    <!-- <div class="affiche"> -->
-    <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" />
-    <!-- </div> -->
-    <!-- <div class="title">
-      <h1 :title="movie.name">{{ movie.name }}</h1>
-    </div> -->
-    <!-- <h3>
-        {{ moment(new Date(movie.release_date)).format("D MMMM YYYY") }}
-        {{ formatDate(new Date(movie.release_date)) }}
-      </h3> -->
-    <!-- <p>{{ movie.overview }}</p> -->
+    <div class="affiche">
+      <img :src="'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path" />
+    </div>
+    <div class="title">
+      <h1 :title="movie.title">{{ movie.title }}</h1>
+    </div>
   </div>
 </template>
 
@@ -28,9 +23,6 @@ export default {
     formatDate: function (myDate) {
       return format(myDate, "d MMMM yyyy", { locale: fr });
     },
-  },
-  created() {
-    console.log(this.movie);
   },
 };
 </script>

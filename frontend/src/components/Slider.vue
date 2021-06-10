@@ -1,6 +1,6 @@
 <template>
   <Swiper
-    :slidesPerView="4"
+    :slidesPerView="6"
     :spaceBetween="5"
     :slidesPerGroup="4"
     :navigation="true"
@@ -34,6 +34,9 @@ SwiperCore.use([Navigation, Pagination]);
 
 export default {
   name: "Slider",
+  props: {
+    sort_by: String,
+  },
   components: {
     Swiper,
     SwiperSlide,
@@ -50,11 +53,11 @@ export default {
     fetchMovies: function () {
       axios
         .get(
-          `https://api.themoviedb.org/3/movie/popular?api_key=57359ff087905e870d40ba4880a1dce0`
+          `http://localhost:3000/movies/?sort_by=` + this.sort_by + `&limit=20`
         )
         .then((response) => {
-          this.movies = response.data.results;
-          console.log(this.movies);
+          this.movies = response.data;
+          // console.log(this.movies);
         })
         .catch((error) => {
           this.moviesLoadingError = "An error occured while fetching movies.";

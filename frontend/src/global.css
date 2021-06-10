@@ -8,6 +8,10 @@ body {
   background-color: #152d44;
 }
 
+h1{
+  color: white;
+}
+
 @font-face {
   font-family: 'BebasNeue';
   font-style: normal;

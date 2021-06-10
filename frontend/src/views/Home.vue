@@ -14,11 +14,15 @@
         <Movie :movie="movie" />
       </li>
     </ul> -->
-      <Slider />
+      <Slider :sort_by="'popularity'" />
     </div>
     <div class="popular">
       <h3>Last Release</h3>
-      <Slider />
+      <Slider :sort_by="'release_date'" />
+    </div>
+    <div class="popular">
+      <h3>Recommendation</h3>
+      <Slider :sort_by="'-vote_average'" />
     </div>
   </div>
 </template>
@@ -45,11 +49,9 @@ export default {
   methods: {
     fetchMovies: function () {
       axios
-        .get(
-          `https://api.themoviedb.org/3/movie/popular?api_key=57359ff087905e870d40ba4880a1dce0`
-        )
+        .get(`http://localhost:3000/movies/?sort_by=popularity&limit=20`)
         .then((response) => {
-          this.movies = response.data.results;
+          this.movies = response.data;
           console.log(this.movies);
         })
         .catch((error) => {

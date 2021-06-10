@@ -12,12 +12,12 @@
       <router-link class="nav-link" to="/about">About</router-link>
     </div>
     <div class="search_bar">
-      <form action="/browse" method="GET">
-        <input type="text" placeholder="Search..." />
-        <button type="submit" class="search-btn">
-          <i class="fas fa-search"></i>
-        </button>
+      <form action="/search" method="GET">
+        <input type="text" v-model="search_string" placeholder="Search..." />
       </form>
+      <button type="submit" class="search-btn">
+        <i class="fas fa-search"></i>
+      </button>
     </div>
   </header>
   <router-view />
