@@ -5,5 +5,5 @@ movieModel
   .limit(20)
   .sort("-vote_average")
   .select(
-    "name release_date original_language overview poster_path status vote_average vote_count"
+    "name release_date original_language overview poster_path backdrop_path status vote_average vote_count"
   );
