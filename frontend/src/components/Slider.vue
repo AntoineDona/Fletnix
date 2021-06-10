@@ -40,6 +40,7 @@ export default {
   name: "Slider",
   props: {
     sort_by: String,
+    genre: String,
   },
   components: {
     Swiper,
@@ -55,22 +56,46 @@ export default {
   },
   methods: {
     fetchMovies: function () {
-      axios
-        .get(
-          `http://localhost:3000/movies/?adult=false&sort_by=` + this.sort_by + `&limit=20`
-        )
-        .then((response) => {
-          this.movies = response.data;
-          // console.log(this.movies);
-        })
-        .catch((error) => {
-          this.moviesLoadingError = "An error occured while fetching movies.";
-          console.error(error);
-        });
+      console.log("sort_by=" + this.sort_by);
+      if (this.sort_by !== undefined) {
+        axios
+          .get(
+            `http://localhost:3000/movies/?adult=false&sort_by=` +
+              this.sort_by +
+              `&limit=20`
+          )
+          .then((response) => {
+            this.movies = response.data;
+            console.log("premier if");
+          })
+          .catch((error) => {
+            this.moviesLoadingError = "An error occured while fetching movies.";
+            console.error(error);
+          });
+      } else if (this.genre !== undefined) {
+        console.log("2e if");
+        console.log(this.genre);
+        console.log(
+          `http://localhost:3000/movies/genre/?name=` + this.genre + `&limit=20`
+        );
+        axios
+          .get(
+            `http://localhost:3000/movies/genre/?name=` +
+              this.genre +
+              `&limit=20`
+          )
+          .then((response) => {
+            this.movies = response.data;
+            console.log(this.movies);
+          })
+          .catch((error) => {
+            this.moviesLoadingError = "An error occured while fetching movies.";
+            console.error(error);
+          });
+      }
     },
   },
   created() {
-    console.log("count is: " + this.movieName);
     this.fetchMovies();
   },
 };

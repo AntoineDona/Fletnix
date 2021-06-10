@@ -1,10 +1,19 @@
 <template>
-  <div class="film" v-if="movie !== null">
-    <div class="affiche">
-      <img :src="'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path" />
-    </div>
-    <div class="title">
-      <h1 :title="movie.name">{{ movie.name }}</h1>
+  <div style="height: 35rem; display: flex; flex align: center;">
+    <div class="film" v-if="movie !== null">
+      <div class="affiche">
+        <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" />
+      </div>
+      <div class="aside">
+        <h1 :title="movie.name">
+          {{
+            movie.name + " (" + formatDate(new Date(movie.release_date)) + ")"
+          }}
+        </h1>
+        <div class="description">
+          {{ movie.overview }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -24,7 +33,7 @@ export default {
   },
   methods: {
     formatDate: function (myDate) {
-      return format(myDate, "d MMMM yyyy", { locale: fr });
+      return format(myDate, "yyyy", { locale: fr });
     },
     fetchMovieDetails: function () {
       axios
@@ -42,32 +51,45 @@ export default {
     this.fetchMovieDetails();
   },
 };
+
+// const bgpath = "https://image.tmdb.org/t/p/w500/" + this.movie.backdrop_path;
 </script>
 
 <style scoped>
 .film {
   display: flex;
-  width: 100%;
-  height: auto;
+  width: 80vw;
+  margin: auto;
+  height: 30rem;
   align-items: center;
-  flex-direction: column;
-  background-color: white;
-  /* border-radius: 0.5rem; */
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.404);
+  background-color: #152d44;
+  /* border: white solid 2px; */
   transition: all 0.2s ease;
   overflow: hidden;
-  position: relative;
-  text-align: center;
+  text-align: left;
+}
+
+.aside {
+  flex-basis: 70%;
+  margin-left: 5rem;
 }
 
 .affiche {
+  height: 100%;
+  width: auto;
   align-self: center;
+  overflow: hidden;
 }
-.film img {
-  width: 100%;
-  height: auto;
+.affiche img {
+  height: 100%;
+  width: auto;
+  border-radius: 1rem;
 }
 
+.description {
+  margin-top: 2rem;
+  color: white;
+}
 .infos {
   height: 5rem;
   padding: 0 0.5rem;
@@ -77,11 +99,11 @@ export default {
 }
 
 .title {
-  color:white;
+  color: white;
 }
 h1 {
   color: white;
-  font-size: 1rem;
+  font-size: 2rem;
   width: 100%;
   margin: auto;
   padding: 0 0.2rem;
@@ -93,13 +115,5 @@ h1 {
 h3 {
   font-size: 0.8rem;
   margin: auto;
-}
-
-.film:hover {
-  transform: scale(1.1);
-  /* background-color: black;
-  color: white; */
-  transition: all 0.4s ease;
-  z-index: 1;
 }
 </style>

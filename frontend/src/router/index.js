@@ -4,6 +4,7 @@ import Search from "../views/Search.vue";
 import MovieDetails from "../views/MovieDetails.vue";
 import Users from "../views/Users.vue";
 import About from "../views/About.vue";
+import Genre from "../views/Genre.vue";
 
 const routes = [
   {
@@ -15,6 +16,11 @@ const routes = [
     path: "/search",
     name: "Search",
     component: Search,
+  },
+  {
+    path: "/genre",
+    name: "Genre",
+    component: Genre,
   },
   {
     path: "/users",
