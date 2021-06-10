@@ -7,7 +7,7 @@
     </div>
     <div class="nav">
       <router-link class="nav-link" to="/">Home</router-link> |
-      <router-link class="nav-link" to="/counter">Counter</router-link> |
+      <router-link class="nav-link" to="/counter">Browse</router-link> |
       <router-link class="nav-link" to="/users">Users</router-link> |
       <router-link class="nav-link" to="/about">About</router-link>
     </div>
@@ -96,7 +96,6 @@ header {
   padding: 0.4rem 0.6rem;
   border-radius: 0.2rem;
   flex-wrap: nowrap;
-
 }
 
 .search_bar input {

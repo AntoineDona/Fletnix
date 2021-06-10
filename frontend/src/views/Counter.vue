@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "Counter",
+  name: "Browse",
   data: function () {
     return {
       counter: 0,
