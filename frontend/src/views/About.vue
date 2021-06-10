@@ -22,7 +22,7 @@
       value="Ajouter"
     />
   </form>
-  <Carousel :itemsToShow="6.5" :wrapAround="true" :currentSlide=10>
+  <Carousel :itemsToShow="6.5" :wrapAround="true" :currentSlide="10">
     <Slide v-for="movie in movies" :key="movie">
       <Movie :movie="movie" />
     </Slide>

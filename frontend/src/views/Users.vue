@@ -4,7 +4,7 @@
 
 <script>
 // @ is an alias to /src
-import MovieDetails from "@/components/MovieDetails.vue";
+import MovieDetails from "@/views/MovieDetails.vue";
 import axios from "axios";
 
 export default {

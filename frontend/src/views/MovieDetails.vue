@@ -1,10 +1,10 @@
 <template>
-  <div class="film">
+  <div class="film" v-if="movie !== null">
     <div class="affiche">
       <img :src="'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path" />
     </div>
     <div class="title">
-      <h1 :title="movie.title">{{ movie.title }}</h1>
+      <h1 :title="movie.name">{{ movie.name }}</h1>
     </div>
   </div>
 </template>
@@ -13,16 +13,33 @@
 // import moment from "moment";
 import { fr } from "date-fns/locale";
 import { format } from "date-fns";
+import axios from "axios";
 
 export default {
   name: "Movie",
-  props: {
-    movie: Array,
+  data: function () {
+    return {
+      movie: null,
+    };
   },
   methods: {
     formatDate: function (myDate) {
       return format(myDate, "d MMMM yyyy", { locale: fr });
     },
+    fetchMovieDetails: function () {
+      axios
+        .get(`http://localhost:3000/movies/movie?id=${this.$route.params.id}`)
+        .then((response) => {
+          this.movie = response.data;
+        })
+        .catch((error) => {
+          this.moviesLoadingError = "An error occured while fetching movies.";
+          console.error(error);
+        });
+    },
+  },
+  created() {
+    this.fetchMovieDetails();
   },
 };
 </script>
@@ -60,14 +77,7 @@ export default {
 }
 
 .title {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  height: 2rem;
-  background-color: rgba(0, 0, 0, 0.377);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  color:white;
 }
 h1 {
   color: white;

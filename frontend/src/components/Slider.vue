@@ -9,11 +9,15 @@
     <SwiperSlide v-for="movie in movies" :key="movie.id">
       <Movie :movie="movie" />
     </SwiperSlide>
-    <SwiperSlide class="see_more">
-      <router-link to="/">Voir plus</router-link>
+
+    <SwiperSlide>
+      <div class="see_more">
+        <router-link to="/">Voir plus</router-link>
+      </div>
     </SwiperSlide>
   </Swiper>
 </template>
+
 <script>
 import Movie from "@/components/Movie.vue";
 import axios from "axios";
@@ -53,7 +57,7 @@ export default {
     fetchMovies: function () {
       axios
         .get(
-          `http://localhost:3000/movies/?sort_by=` + this.sort_by + `&limit=20`
+          `http://localhost:3000/movies/?adult=false&sort_by=` + this.sort_by + `&limit=20`
         )
         .then((response) => {
           this.movies = response.data;

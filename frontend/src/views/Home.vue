@@ -21,8 +21,12 @@
       <Slider :sort_by="'release_date'" />
     </div>
     <div class="popular">
-      <h3>Recommendation</h3>
-      <Slider :sort_by="'-vote_average'" />
+      <h3>Most watched</h3>
+      <Slider :sort_by="'vote_count'" />
+    </div>
+    <div class="popular">
+      <h3>Box Office</h3>
+      <Slider :sort_by="'revenue'" />
     </div>
   </div>
 </template>
@@ -52,7 +56,6 @@ export default {
         .get(`http://localhost:3000/movies/?sort_by=popularity&limit=20`)
         .then((response) => {
           this.movies = response.data;
-          console.log(this.movies);
         })
         .catch((error) => {
           this.moviesLoadingError = "An error occured while fetching movies.";
@@ -61,7 +64,6 @@ export default {
     },
   },
   created() {
-    console.log("count is: " + this.movieName);
     this.fetchMovies();
   },
 };
