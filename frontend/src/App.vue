@@ -13,7 +13,12 @@
     </div>
     <div class="search_bar">
       <form action="/search" method="GET">
-        <input type="text" v-model="search_string" placeholder="Search..." />
+        <input
+          type="text"
+          @keyup.enter="onchange"
+          v-model="search_string"
+          placeholder="Search..."
+        />
       </form>
       <button type="submit" class="search-btn">
         <i class="fas fa-search"></i>
@@ -36,7 +41,22 @@
     <!-- <p>&copy;2020 designed by <span> Antoine Do Nascimento</span></p> -->
   </footer>
 </template>
-
+<script>
+export default {
+  name: "App",
+  data: function () {
+    return {
+      movies: [],
+    };
+  },
+  methods: {
+    onchange: function () {
+      window.location.href =
+        "http://localhost:8080/search/" + this.search_string;
+    },
+  },
+};
+</script>
 <style scoped>
 header {
   display: flex;
