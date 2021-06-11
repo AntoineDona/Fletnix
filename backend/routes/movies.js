@@ -8,9 +8,6 @@ router.get("/", function (req, res) {
     .find({})
     .limit(parseInt(req.query.limit))
     .sort("-" + req.query.sort_by)
-    .select(
-      "id _id name release_date original_language overview poster_path backdrop_path status vote_average vote_count"
-    )
     .then(function (movies) {
       res.json(movies);
       console.log("ok");
@@ -19,15 +16,10 @@ router.get("/", function (req, res) {
 
 router.get("/movie/", function (req, res) {
   console.log(req.query);
-  movieModel
-    .findOne({ _id: req.query.id })
-    .select(
-      "id _id name release_date original_language overview poster_path backdrop_path status vote_average vote_count"
-    )
-    .then(function (movie) {
-      res.json(movie);
-      console.log("ok");
-    });
+  movieModel.findOne({ _id: req.query.id }).then(function (movie) {
+    res.json(movie);
+    console.log("ok");
+  });
 });
 
 router.get("/genre/", function (req, res) {
@@ -36,9 +28,7 @@ router.get("/genre/", function (req, res) {
     .find({ "genres.name": req.query.name })
     .limit(parseInt(req.query.limit))
     .sort("-vote_count")
-    .select(
-      "id _id name genres release_date original_language overview poster_path backdrop_path status vote_average vote_count"
-    )
+
     .then(function (movies) {
       res.json(movies);
       console.log(movies);
