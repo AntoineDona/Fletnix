@@ -53,10 +53,8 @@ router.get("/search", function (req, res) {
   movieModel
     .find({ name: req.query.name })
     .limit(parseInt(req.query.limit))
-    .sort("-" + req.query.sort_by)
-    .select(
-      "id _id name release_date original_language overview poster_path backdrop_path status vote_average vote_count"
-    )
+    .sort("-vote_count")
+
     .then(function (movies) {
       res.json(movies);
       console.log("ok");
