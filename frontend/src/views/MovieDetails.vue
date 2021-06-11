@@ -1,16 +1,32 @@
 <template>
-  <div style="height: 35rem; display: flex; flex align: center;">
-    <div class="film" v-if="movie !== null">
-      <div class="affiche">
-        <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" />
+  <div class="film" v-if="movie !== null">
+    <div class="affiche">
+      <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" />
+    </div>
+    <div class="aside">
+      <h1 :title="movie.name">
+        {{
+          movie.name +
+          " (" +
+          formatDate(new Date(movie.release_date), "yyyy") +
+          ")"
+        }}
+      </h1>
+      <div class="sous_infos">
+        <h3>{{ formatDate(new Date(movie.release_date), "d MMMM yyyy") }}</h3>
+        <div class="separator"></div>
+        <div class="genres" v-for="genre of movie.genres" :key="genre.id">
+          <h3>
+            {{ genre.name }}
+          </h3>
+          <div class="separator"></div>
+        </div>
+        <h3 class="duree">{{ timeConvert(movie.runtime) }}</h3>
+        <div class="separator"></div>
       </div>
-      <div class="aside">
-        <h1 :title="movie.name">
-          {{
-            movie.name + " (" + formatDate(new Date(movie.release_date)) + ")"
-          }}
-        </h1>
-        <div class="description">
+      <div class="description">
+        <h2>Synopsis</h2>
+        <div>
           {{ movie.overview }}
         </div>
       </div>
@@ -32,8 +48,8 @@ export default {
     };
   },
   methods: {
-    formatDate: function (myDate) {
-      return format(myDate, "yyyy", { locale: fr });
+    formatDate: function (myDate, Dateformat) {
+      return format(myDate, Dateformat, { locale: fr });
     },
     fetchMovieDetails: function () {
       axios
@@ -45,6 +61,15 @@ export default {
           this.moviesLoadingError = "An error occured while fetching movies.";
           console.error(error);
         });
+    },
+    timeConvert: function (n) {
+      var num = n;
+      console.log(n);
+      var hours = num / 60;
+      var rhours = Math.floor(hours);
+      var minutes = (hours - rhours) * 60;
+      var rminutes = Math.round(minutes);
+      return rhours + " h " + rminutes;
     },
   },
   created() {
@@ -60,7 +85,8 @@ export default {
   display: flex;
   width: 80vw;
   margin: auto;
-  height: 30rem;
+  height: 37rem;
+  justify-content: space-around;
   align-items: center;
   background-color: #152d44;
   /* border: white solid 2px; */
@@ -70,25 +96,45 @@ export default {
 }
 
 .aside {
-  flex-basis: 70%;
-  margin-left: 5rem;
+  flex-basis: 60vw;
+  margin-left: 2rem;
+  overflow: hidden;
+}
+
+.sous_infos {
+  margin-top: 1rem;
+  color: white;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.sous_infos h3 {
+  margin: unset;
 }
 
 .affiche {
+  display: flex;
+  border-radius: 1rem;
+  flex-basis: 30%;
   height: 100%;
-  width: auto;
   align-self: center;
+  align-items: center;
   overflow: hidden;
 }
+
 .affiche img {
-  height: 100%;
-  width: auto;
+  width: 100%;
   border-radius: 1rem;
 }
 
 .description {
   margin-top: 2rem;
   color: white;
+}
+
+.description h2 {
+  margin-bottom: 0.75rem;
 }
 .infos {
   height: 5rem;
@@ -112,8 +158,25 @@ h1 {
   overflow: hidden;
 }
 
+h2 {
+  color: white;
+}
+
 h3 {
   font-size: 0.8rem;
   margin: auto;
+}
+
+.genres {
+  display: flex;
+  align-items: center;
+}
+
+.separator {
+  width: 5px;
+  height: 5px;
+  background-color: white;
+  border-radius: 50%;
+  margin: 0 0.5rem;
 }
 </style>
