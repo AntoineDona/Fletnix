@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="popular">
-      <h3>Popular</h3>
+      <h3>Populaire</h3>
       <!-- <input v-model="movieName" placeholder="edit me" />
     <p>Message is: {{ movieName }}</p> -->
       <!-- <ul id="array-rendering">
@@ -17,11 +17,11 @@
       <Slider :sort_by="'popularity'" />
     </div>
     <div class="popular">
-      <h3>Last Release</h3>
+      <h3>Dernières sorties</h3>
       <Slider :sort_by="'release_date'" />
     </div>
     <div class="popular">
-      <h3>Most watched</h3>
+      <h3>Les plus vus</h3>
       <Slider :sort_by="'vote_count'" />
     </div>
     <div class="popular">

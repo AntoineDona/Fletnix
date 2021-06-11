@@ -2,16 +2,13 @@
   <div class="home">
     <h1>Genres</h1>
     <div class="popular" v-for="genre in genres" :key="genre">
-      <h3>{{ genre }}</h3>
-      <Slider :genre="genre" />
-    </div>
-    <div class="popular">
-      <h3>Animation</h3>
-      <Slider genre="Animation" />
-    </div>
-    <div class="popular">
-      <h3>Comedy</h3>
-      <Slider genre="Comedy" />
+      <h3>
+        <router-link :to="'/genre/' + lowerFirstLetter(genre)">{{
+          genre
+        }}</router-link>
+      </h3>
+
+      <Slider :genre="genre" :lower_genre="lowerFirstLetter(genre)"/>
     </div>
   </div>
 </template>
@@ -66,6 +63,9 @@ export default {
           console.error(error);
         });
     },
+    lowerFirstLetter: function (string) {
+      return string.charAt(0).toLowerCase() + string.slice(1);
+    },
   },
 };
 </script>
@@ -74,13 +74,14 @@ export default {
 <style scoped>
 .home {
   text-align: center;
+  overflow: hidden;
 }
 
 .popular {
   display: flex;
+  width: 98vw;
   flex-direction: column;
   align-items: flex-start;
-  width: 90vw;
   margin: auto;
 }
 
@@ -90,11 +91,15 @@ h1 {
 
 h3 {
   color: white;
-  margin-left: 2.2rem;
+  height: auto;
+  margin-left: 2.5rem;
   margin-bottom: -1rem;
 }
 
 a {
-  color: #42b983;
+  color: white;
+  height: 1rem;
+  margin-bottom: -1rem;
+  text-decoration-color: white;
 }
 </style>

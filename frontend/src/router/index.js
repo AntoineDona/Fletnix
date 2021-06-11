@@ -3,6 +3,8 @@ import Home from "../views/Home.vue";
 import Search from "../views/Search.vue";
 import MovieDetails from "../views/MovieDetails.vue";
 import Users from "../views/Users.vue";
+import Add from "../views/Add.vue";
+import Browse from "../views/Add.vue";
 import About from "../views/About.vue";
 import Genre from "../views/Genre.vue";
 
@@ -16,6 +18,11 @@ const routes = [
     path: "/search",
     name: "Search",
     component: Search,
+  },
+  {
+    path: "/counter",
+    name: "Browse",
+    component: Browse,
   },
   {
     path: "/genre",
@@ -36,6 +43,11 @@ const routes = [
     path: "/movies/:id",
     name: "MovieDetails",
     component: MovieDetails,
+  },
+  {
+    path: "/users",
+    name: "Users",
+    component: Add,
   },
 ];
 
