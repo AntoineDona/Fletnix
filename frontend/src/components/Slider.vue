@@ -12,7 +12,9 @@
 
     <SwiperSlide>
       <div class="see_more">
-        <router-link to="/">Voir plus</router-link>
+        <router-link v-if="genre !== undefined" :to="'/genre/' + lower_genre"
+          >Voir plus</router-link
+        >
       </div>
     </SwiperSlide>
   </Swiper>
@@ -41,6 +43,7 @@ export default {
   props: {
     sort_by: String,
     genre: String,
+    lower_genre: String,
   },
   components: {
     Swiper,
@@ -103,8 +106,9 @@ export default {
 
 <style scoped>
 .swiper-container {
-  padding: 2rem 2rem;
-  width: 100%;
+  margin: 1rem auto;
+  padding: 1rem;
+  width: 90vw;
 }
 
 .swiper-slide {
