@@ -42,6 +42,7 @@ export default {
   name: "Slider",
   props: {
     sort_by: String,
+    status: String,
     genre: String,
     lower_genre: String,
   },
@@ -59,13 +60,14 @@ export default {
   },
   methods: {
     fetchMovies: function () {
-      console.log("sort_by=" + this.sort_by);
+      // console.log(this.status);
       if (this.sort_by !== undefined) {
         axios
           .get(
             `http://localhost:3000/movies/?adult=false&sort_by=` +
               this.sort_by +
-              `&limit=20`
+              `&limit=20&status=` +
+              this.status
           )
           .then((response) => {
             this.movies = response.data;
