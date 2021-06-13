@@ -85,7 +85,7 @@ export default {
           .get(
             `http://localhost:3000/movies/genre/?name=` +
               this.genre +
-              `&limit=20`
+              `&limit=10`
           )
           .then((response) => {
             this.movies = response.data;
