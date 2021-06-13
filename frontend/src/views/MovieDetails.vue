@@ -125,12 +125,11 @@ export default {
           `http://localhost:3000/stats?movie_id=${this.$route.params.id}&param=like`
         )
         .then((response) => {
-          console.log(response.data.like);
-          if (response.data.like == undefined) {
-            console.log("pas encore défini");
+          if (response.data == null) {
+            // console.log("like n'est pas encore défini");
             this.like = 0;
           } else {
-            console.log("déjà défini, on affiche");
+            // console.log("like est déjà défini, on affiche");
             this.like = response.data.like;
           }
         })

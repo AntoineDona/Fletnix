@@ -8,7 +8,7 @@ router.get("/", function (req, res) {
     .findOne({ movie_id: req.query.movie_id, user_id: "Antoinedo" })
     .then(function (liked) {
       res.json(liked);
-      console.log("get a marche");
+      // console.log(liked);
     });
 });
 
