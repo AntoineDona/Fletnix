@@ -8,7 +8,7 @@
         }}</router-link>
       </h3>
 
-      <Slider :genre="genre" :lower_genre="lowerFirstLetter(genre)"/>
+      <Slider :genre="genre" :lower_genre="lowerFirstLetter(genre)" />
     </div>
   </div>
 </template>
