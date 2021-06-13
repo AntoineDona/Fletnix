@@ -7,17 +7,9 @@
     </div>
     <div class="nav">
       <router-link class="nav-link" to="/">Home</router-link> |
-      <router-link class="nav-link" to="/counter">Parcourir</router-link> |
+      <router-link class="nav-link" to="/browse">Parcourir</router-link> |
       <router-link class="nav-link" to="/genre">Genres</router-link> |
       <router-link class="nav-link" to="/users">Users</router-link>
-    </div>
-    <div class="search_bar">
-      <form action="/search" method="GET">
-        <input type="text" v-model="search_string" placeholder="Search..." />
-      </form>
-      <button type="submit" class="search-btn">
-        <i class="fas fa-search"></i>
-      </button>
     </div>
   </header>
   <router-view />
@@ -40,7 +32,7 @@
 <style scoped>
 header {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   width: 100%;
   height: 4rem;
@@ -50,6 +42,8 @@ header {
 }
 
 .logo h1 {
+  margin-right: 3rem;
+  flex-basis: 30%;
   font-family: "BebasNeue";
   color: #a9cef4;
   letter-spacing: 10px;
@@ -61,8 +55,9 @@ header {
 }
 
 .nav {
+  margin-left:5rem;
   display: flex;
-  justify-content: center;
+  flex-basis: 50%;
   align-items: center;
   text-align: center;
   width: 50%;
