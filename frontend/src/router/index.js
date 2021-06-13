@@ -4,7 +4,7 @@ import Search from "../views/Search.vue";
 import MovieDetails from "../views/MovieDetails.vue";
 import Users from "../views/Users.vue";
 import Add from "../views/Add.vue";
-import Browse from "../views/Add.vue";
+import Browse from "../views/Browse.vue";
 import About from "../views/About.vue";
 import Genre from "../views/Genre.vue";
 
@@ -20,7 +20,7 @@ const routes = [
     component: Search,
   },
   {
-    path: "/counter",
+    path: "/browse",
     name: "Browse",
     component: Browse,
   },
