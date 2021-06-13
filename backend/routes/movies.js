@@ -7,6 +7,20 @@ router.get("/", function (req, res) {
     .find({ status: req.query.status })
     .limit(parseInt(req.query.limit))
     .sort("-" + req.query.sort_by)
+    .select({ _id: 1, poster_path: 1 })
+    // .select("_id", "poster_path")
+    .then(function (movies) {
+      res.json(movies);
+      // console.log("ok");
+    });
+});
+
+router.get("/default", function (req, res) {
+  movieModel
+    .find({ status: "Released" })
+    .limit(20)
+    .sort("-popularity")
+    // .select("_id", "poster_path")
     .then(function (movies) {
       res.json(movies);
       // console.log("ok");
@@ -27,7 +41,7 @@ router.get("/genre/", function (req, res) {
     .find({ "genres.name": req.query.name })
     .limit(parseInt(req.query.limit))
     .sort("-vote_count")
-
+    .select({ _id: 1, poster_path: 1 })
     .then(function (movies) {
       res.json(movies);
       // console.log(movies);
@@ -40,6 +54,12 @@ router.get("/search", function (req, res) {
       $or: [
         { name: { $regex: new RegExp(req.query.name, "i") } },
         { overview: { $regex: new RegExp(req.query.name, "i") } },
+        { genres: { $regex: new RegExp(req.query.name, "i") } },
+        { "credits.cast.name": { $regex: new RegExp(req.query.name, "i") } },
+        {
+          "credits.cast.character": { $regex: new RegExp(req.query.name, "i") },
+        },
+        { "credits.crew.name": { $regex: new RegExp(req.query.name, "i") } },
       ],
     })
     .limit(20)
