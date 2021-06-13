@@ -3,14 +3,13 @@ const movieModel = require("../models/movie");
 const router = express.Router();
 
 router.get("/", function (req, res) {
-  console.log(req.query);
   movieModel
-    .find({})
+    .find({ status: req.query.status })
     .limit(parseInt(req.query.limit))
     .sort("-" + req.query.sort_by)
     .then(function (movies) {
       res.json(movies);
-      console.log("ok");
+      // console.log("ok");
     });
 });
 
@@ -18,12 +17,12 @@ router.get("/movie/", function (req, res) {
   console.log(req.query);
   movieModel.findOne({ _id: req.query.id }).then(function (movie) {
     res.json(movie);
-    console.log("ok");
+    // console.log("ok");
   });
 });
 
 router.get("/genre/", function (req, res) {
-  console.log(req.query);
+  // console.log(req.query);
   movieModel
     .find({ "genres.name": req.query.name })
     .limit(parseInt(req.query.limit))
@@ -31,39 +30,30 @@ router.get("/genre/", function (req, res) {
 
     .then(function (movies) {
       res.json(movies);
-      console.log(movies);
+      // console.log(movies);
     });
 });
 
 router.get("/search", function (req, res) {
   movieModel
-    .find({ name: req.query.name })
-    .limit(parseInt(req.query.limit))
-    .sort("-" + req.query.sort_by)
-    .select(
-      "id _id name release_date original_language overview poster_path backdrop_path status vote_average vote_count"
-    )
+    .find({
+      $or: [
+        { name: { $regex: new RegExp(req.query.name, "i") } },
+        { overview: { $regex: new RegExp(req.query.name, "i") } },
+      ],
+    })
+    .limit(20)
+    .sort("-popularity")
     .then(function (movies) {
+      // console.log(movies);
       res.json(movies);
-      console.log("ok");
-    });
-});
-
-router.get("/search", function (req, res) {
-  movieModel
-    .find({ name: req.query.name })
-    .limit(parseInt(req.query.limit))
-    .sort("-vote_count")
-
-    .then(function (movies) {
-      res.json(movies);
-      console.log("ok");
+      // console.log("ok");
     });
 });
 
 router.post("/new", function (req, res) {
   res.send("POST bien reçu");
-  console.log(req.body);
+  // console.log(req.body);
 
   const newMovie = new movieModel({
     name: req.body.name,
