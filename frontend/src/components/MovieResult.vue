@@ -1,34 +1,38 @@
 <template>
   <div class="film" v-if="movie !== null">
-    <div class="affiche">
-      <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" />
-    </div>
-    <div class="aside">
-      <h1 :title="movie.name">
-        {{
-          movie.name +
-          " (" +
-          formatDate(new Date(movie.release_date), "yyyy") +
-          ")"
-        }}
-      </h1>
-      <div class="sous_infos">
-        <h3>{{ formatDate(new Date(movie.release_date), "d MMMM yyyy") }}</h3>
-        <div v-if="movie.vote_average !== 0" class="separator"></div>
-        <h3 v-if="movie.vote_average !== 0" class="duree">
-          Note: {{ movie.vote_average }} /10
-        </h3>
+    <div class="top">
+      <div class="affiche">
+        <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" />
       </div>
-      <div class="description">
-        <h2>Synopsis</h2>
-        <div>
-          {{ movie.overview }}
+      <div class="aside">
+        <h1 :title="movie.name">
+          {{
+            movie.name +
+            " (" +
+            formatDate(new Date(movie.release_date), "yyyy") +
+            ")"
+          }}
+        </h1>
+        <div class="sous_infos">
+          <h3>{{ formatDate(new Date(movie.release_date), "d MMMM yyyy") }}</h3>
+          <div v-if="movie.vote_average !== 0" class="separator"></div>
+          <h3 v-if="movie.vote_average !== 0" class="duree">
+            Note: {{ movie.vote_average }} /10
+          </h3>
+        </div>
+        <div class="description">
+          <div class="synopsis">
+            {{ movie.overview }}
+          </div>
         </div>
       </div>
-      <router-link :to="'/movies/' + movie._id">
-        <button>En savoir plus</button>
-      </router-link>
     </div>
+    <router-link
+      :to="'/movies/' + movie._id"
+      style="margin-top: -1rem; margin-bottom: -0.5rem"
+    >
+      <button>En savoir plus</button>
+    </router-link>
   </div>
 </template>
 
@@ -61,15 +65,28 @@ export default {
 <style scoped>
 .film {
   display: flex;
-  width: 90vw;
+  width: 75vw;
   margin: 1rem auto;
   padding: 1rem;
   /* height: 31rem; */
   justify-content: space-around;
   align-items: center;
   background-color: #1d3e5e;
+  border-radius: 1rem;
   /* border: white solid 2px; */
   transition: all 0.2s ease;
+  overflow: hidden;
+  text-align: left;
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.411);
+  flex-wrap: wrap;
+}
+
+.top {
+  display: flex;
+  width: 100%;
+  margin: auto;
+  justify-content: space-around;
+  align-items: center;
   overflow: hidden;
   text-align: left;
 }
@@ -87,7 +104,7 @@ export default {
 
 .affiche img {
   max-width: 100%;
-  max-height: 25rem;
+  max-height: 10rem;
 }
 
 .like-dislike {
@@ -105,13 +122,12 @@ export default {
 .aside {
   flex-basis: 60vw;
   height: 100%;
-  padding: 1rem 0;
-  margin-left: 2rem;
+  margin-left: 1rem;
   overflow: hidden;
 }
 
 .sous_infos {
-  margin-top: 1rem;
+  margin-top: 0.8rem;
   color: white;
   display: flex;
   justify-content: left;
@@ -123,13 +139,42 @@ export default {
 }
 
 .description {
-  margin-top: 2rem;
+  margin-top: 0.8rem;
   color: white;
 }
 
 .description h2 {
   margin-bottom: 0.75rem;
 }
+
+.description a {
+  display: block;
+  margin: auto;
+  margin-top: -0.5rem;
+  margin-bottom: -1rem;
+  text-align: center;
+}
+
+.synopsis {
+  font-size: 0.7rem;
+  line-height: 1rem;
+  position: relative;
+  max-height: 4rem;
+  overflow: hidden;
+  /* text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; */
+}
+.synopsis:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 50%;
+  width: 100%;
+  background: linear-gradient(#1d3e5e5d, #1d3e5e);
+}
+
 .infos {
   height: 5rem;
   padding: 0 0.5rem;
@@ -143,10 +188,9 @@ export default {
 }
 h1 {
   color: white;
-  font-size: 2rem;
+  font-size: 1.1rem;
   width: 100%;
   margin: auto;
-  padding: 0 0.2rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -154,6 +198,7 @@ h1 {
 
 h2 {
   color: white;
+  font-size: 0.8rem;
 }
 
 h3 {
@@ -175,16 +220,17 @@ h3 {
 }
 
 button {
-  margin-top: 2rem;
   background: none;
-  padding: 1rem;
+  padding: 0.3rem 0;
   width: 10rem;
   color: white;
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   font-weight: bold;
   border: solid white 2px;
   border-radius: 1rem;
   transition: all 0.4s ease;
+  margin-top: -0.5rem;
+  margin-bottom: -1rem;
 }
 
 button:hover {
