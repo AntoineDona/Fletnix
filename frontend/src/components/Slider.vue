@@ -71,18 +71,16 @@ export default {
           )
           .then((response) => {
             this.movies = response.data;
-            console.log("premier if");
           })
           .catch((error) => {
             this.moviesLoadingError = "An error occured while fetching movies.";
             console.error(error);
           });
       } else if (this.genre !== undefined) {
-        console.log("2e if");
-        console.log(this.genre);
-        console.log(
-          `http://localhost:3000/movies/genre/?name=` + this.genre + `&limit=20`
-        );
+        // console.log(this.genre);
+        // console.log(
+        //   `http://localhost:3000/movies/genre/?name=` + this.genre + `&limit=20`
+        // );
         axios
           .get(
             `http://localhost:3000/movies/genre/?name=` +
@@ -91,7 +89,7 @@ export default {
           )
           .then((response) => {
             this.movies = response.data;
-            console.log(this.movies);
+            // console.log(this.movies);
           })
           .catch((error) => {
             this.moviesLoadingError = "An error occured while fetching movies.";
