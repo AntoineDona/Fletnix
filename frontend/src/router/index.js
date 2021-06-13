@@ -31,8 +31,13 @@ const routes = [
     component: Genre,
   },
   {
-    path: "/genre/:id",
+    path: "/genre/:genre",
     name: "FullGenreList",
+    component: FullList,
+  },
+  {
+    path: "/sort_by/:sort_by",
+    name: "FullSortedList",
     component: FullList,
   },
   {

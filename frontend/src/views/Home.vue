@@ -6,7 +6,9 @@
       </div>
     </div>
     <div class="popular">
-      <h3>Populaire</h3>
+      <h3>
+        <router-link :to="'/sort_by/popularity'"> Populaire </router-link>
+      </h3>
       <!-- <input v-model="movieName" placeholder="edit me" />
     <p>Message is: {{ movieName }}</p> -->
       <!-- <ul id="array-rendering">
@@ -17,15 +19,15 @@
       <Slider :sort_by="'popularity'" status="Released" />
     </div>
     <div class="popular">
-      <h3>Upcoming</h3>
+      <router-link :to="'/sort_by/release_date'"> Upcoming </router-link>
       <Slider :sort_by="'release_date'" status="Released" />
     </div>
     <div class="popular">
-      <h3>Les plus vus</h3>
+      <router-link :to="'/sort_by/views'"> Les plus vus </router-link>
       <Slider :sort_by="'vote_count'" status="Released" />
     </div>
     <div class="popular">
-      <h3>Box Office</h3>
+      <router-link :to="'/sort_by/revenue'"> Box Office </router-link>
       <Slider :sort_by="'revenue'" status="Released" />
     </div>
   </div>
@@ -124,11 +126,17 @@ li {
 
 h3 {
   color: white;
-  margin-left: 2.2rem;
+  height: auto;
+  width: 85vw;
+  text-align: left;
+  margin: auto;
   margin-bottom: -1rem;
 }
 
 a {
-  color: #42b983;
+  color: white;
+  height: 1rem;
+  margin-bottom: -1rem;
+  text-decoration: none;
 }
 </style>

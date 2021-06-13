@@ -92,7 +92,9 @@ h1 {
 h3 {
   color: white;
   height: auto;
-  margin-left: 2.5rem;
+  width: 85vw;
+  text-align: left;
+  margin: auto;
   margin-bottom: -1rem;
 }
 
@@ -100,6 +102,6 @@ a {
   color: white;
   height: 1rem;
   margin-bottom: -1rem;
-  text-decoration-color: white;
+  text-decoration: none;
 }
 </style>

@@ -12,9 +12,12 @@
 
     <SwiperSlide>
       <div class="see_more">
-        <router-link v-if="genre !== undefined" :to="'/genre/' + lower_genre"
-          >Voir plus</router-link
-        >
+        <router-link v-if="genre !== undefined" :to="'/genre/' + lower_genre">
+          Voir plus
+        </router-link>
+        <router-link v-if="sort_by !== undefined" :to="'/sort_by/' + sort_by">
+          Voir plus
+        </router-link>
       </div>
     </SwiperSlide>
   </Swiper>
@@ -140,12 +143,20 @@ export default {
 }
 
 .see_more a {
-  color: #152d44;
-  background-color: white;
-  text-decoration: none;
+  color: white;
+  background-color: transparent;
   border: solid white 1px;
   padding: 0.5rem;
   font-weight: bolder;
+  border-radius: 1rem;
+  text-decoration: none;
+  transition: all 0.4s ease;
+}
+
+.see_more a:hover {
+  color: #152d44;
+  background-color: white;
+  transition: all 0.2s ease;
 }
 
 .swiper-slide img {

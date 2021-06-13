@@ -7,7 +7,14 @@ router.get("/", function (req, res) {
     .find({ status: req.query.status })
     .limit(parseInt(req.query.limit))
     .sort("-" + req.query.sort_by)
-    .select({ _id: 1, poster_path: 1 })
+    .select({
+      _id: 1,
+      poster_path: 1,
+      name: 1,
+      release_date: 1,
+      overview: 1,
+      vote_average: 1,
+    })
     // .select("_id", "poster_path")
     .then(function (movies) {
       res.json(movies);
@@ -41,7 +48,14 @@ router.get("/genre/", function (req, res) {
     .find({ "genres.name": req.query.name })
     .limit(parseInt(req.query.limit))
     .sort("-vote_count")
-    .select({ _id: 1, poster_path: 1 })
+    .select({
+      _id: 1,
+      poster_path: 1,
+      name: 1,
+      release_date: 1,
+      overview: 1,
+      vote_average: 1,
+    })
     .then(function (movies) {
       res.json(movies);
       // console.log(movies);
