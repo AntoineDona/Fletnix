@@ -7,6 +7,7 @@ import Add from "../views/Add.vue";
 import Browse from "../views/Browse.vue";
 import About from "../views/About.vue";
 import Genre from "../views/Genre.vue";
+import FullList from "../views/FullList.vue";
 
 const routes = [
   {
@@ -15,9 +16,9 @@ const routes = [
     component: Home,
   },
   {
-    path: "/search/:name",
-    name: "Search",
-    component: Search,
+    path: "/movies/:id",
+    name: "MovieDetails",
+    component: MovieDetails,
   },
   {
     path: "/browse",
@@ -30,6 +31,11 @@ const routes = [
     component: Genre,
   },
   {
+    path: "/genre/:id",
+    name: "FullGenreList",
+    component: FullList,
+  },
+  {
     path: "/users",
     name: "Users",
     component: Users,
@@ -40,14 +46,14 @@ const routes = [
     component: About,
   },
   {
-    path: "/movies/:id",
-    name: "MovieDetails",
-    component: MovieDetails,
-  },
-  {
     path: "/users",
     name: "Users",
     component: Add,
+  },
+  {
+    path: "/search/:name",
+    name: "Search",
+    component: Search,
   },
 ];
 
