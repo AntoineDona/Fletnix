@@ -22,35 +22,16 @@
       value="Ajouter"
     />
   </form>
-  <Carousel :itemsToShow="6.5" :wrapAround="true" :currentSlide="10">
-    <Slide v-for="movie in movies" :key="movie">
-      <Movie :movie="movie" />
-    </Slide>
-
-    <template #addons>
-      <Navigation />
-      <Pagination />
-    </template>
-  </Carousel>
 </template>
 
 <script>
 // @ is an alias to /src
 import axios from "axios";
-import Movie from "@/components/Movie.vue";
-import "vue3-carousel/dist/carousel.css";
-import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 
 export default {
   //j'exporte de mon fichier.
   name: "About",
-  components: {
-    Movie,
-    Carousel,
-    Slide,
-    Pagination,
-    Navigation,
-  },
+  components: {},
   data: function () {
     return {
       movieName: "test",
