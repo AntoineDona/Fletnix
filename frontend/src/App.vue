@@ -28,7 +28,22 @@
     <!-- <p>&copy;2020 designed by <span> Antoine Do Nascimento</span></p> -->
   </footer>
 </template>
-
+<script>
+export default {
+  name: "App",
+  data: function () {
+    return {
+      movies: [],
+    };
+  },
+  methods: {
+    onchange: function () {
+      window.location.href =
+        "http://localhost:8080/search/" + this.search_string;
+    },
+  },
+};
+</script>
 <style scoped>
 header {
   display: flex;
@@ -55,7 +70,7 @@ header {
 }
 
 .nav {
-  margin-left:5rem;
+  margin-left: 5rem;
   display: flex;
   flex-basis: 50%;
   align-items: center;

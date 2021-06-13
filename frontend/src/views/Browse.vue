@@ -82,7 +82,7 @@ export default {
           if (newMovie.length == 0) {
             return { message: `Enter a movies name` };
           } else {
-            console.log(response.data);
+            // console.log(response.data);
             this.movies = response.data;
           }
           // Do something if call succe

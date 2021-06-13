@@ -68,14 +68,13 @@ export default {
 };
 </script>
 <style scoped>
-
-.container{
-  min-height:85vh;
-  width:70vw;
-  margin:auto;
+.container {
+  min-height: 85vh;
+  width: 70vw;
+  margin: auto;
   display: flex;
   flex-direction: column;
-  align-items:center;
+  align-items: center;
 }
 .add-user-title {
   margin: 1rem 0;
