@@ -1,27 +1,29 @@
 <template>
-  <div class="add-user-title">Add new user:</div>
-  <div class="add-user-form-container">
-    <form ref="addUserForm">
-      <input
-        class="add-user-input"
-        v-model="user.email"
-        type="email"
-        placeholder="Email"
-        required
-      />
-      <input
-        class="add-user-input"
-        v-model="user.firstName"
-        placeholder="First name"
-      />
-      <input
-        class="add-user-input"
-        v-model="user.lastName"
-        placeholder="Last name"
-      />
-    </form>
-    <button class="add-user-button" @click="addUser()">Add user</button>
-    <div v-if="userCreationError">{{ userCreationError }}</div>
+  <div class="container">
+    <h1 class="add-user-title">Add new user:</h1>
+    <div class="add-user-form-container">
+      <form ref="addUserForm">
+        <input
+          class="add-user-input"
+          v-model="user.email"
+          type="email"
+          placeholder="Email"
+          required
+        />
+        <input
+          class="add-user-input"
+          v-model="user.firstName"
+          placeholder="First name"
+        />
+        <input
+          class="add-user-input"
+          v-model="user.lastName"
+          placeholder="Last name"
+        />
+      </form>
+      <button class="add-user-button" @click="addUser()">Add user</button>
+      <div v-if="userCreationError">{{ userCreationError }}</div>
+    </div>
   </div>
 </template>
 
@@ -66,31 +68,41 @@ export default {
 };
 </script>
 <style scoped>
+
+.container{
+  min-height:85vh;
+  width:70vw;
+  margin:auto;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+}
 .add-user-title {
-  margin-bottom: 10px;
+  margin: 1rem 0;
   color: white;
-  padding-left: 47rem;
 }
 
 .add-user-form-container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 20px;
-  display: block;
-  padding-bottom: 32rem;
-  padding-left: 45rem;
 }
 
 .add-user-input {
+  display: block;
   padding-top: 10rem;
   padding-bottom: 37rem;
   margin-right: 10px;
+  margin-top: 0.5rem;
   padding: 5px;
-  vertical-align: 1rem;
-  display: block;
+  border-radius: 1rem;
 }
 
 .add-user-button {
+  margin-top: 1rem;
   cursor: pointer;
   padding: 5px;
+  border-radius: 1rem;
 }
 </style>
