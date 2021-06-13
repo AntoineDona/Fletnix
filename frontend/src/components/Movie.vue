@@ -24,7 +24,7 @@ import { format } from "date-fns";
 export default {
   name: "Movie",
   props: {
-    movie: Array,
+    movie: Object,
   },
   methods: {
     formatDate: function (myDate) {
