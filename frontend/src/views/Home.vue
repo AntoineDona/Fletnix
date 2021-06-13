@@ -14,19 +14,19 @@
         <Movie :movie="movie" />
       </li>
     </ul> -->
-      <Slider :sort_by="'popularity'" />
+      <Slider :sort_by="'popularity'" status="Released" />
     </div>
     <div class="popular">
-      <h3>Dernières sorties</h3>
-      <Slider :sort_by="'release_date'" />
+      <h3>Upcoming</h3>
+      <Slider :sort_by="'release_date'" status="Released" />
     </div>
     <div class="popular">
       <h3>Les plus vus</h3>
-      <Slider :sort_by="'vote_count'" />
+      <Slider :sort_by="'vote_count'" status="Released" />
     </div>
     <div class="popular">
       <h3>Box Office</h3>
-      <Slider :sort_by="'revenue'" />
+      <Slider :sort_by="'revenue'" status="Released" />
     </div>
   </div>
 </template>
