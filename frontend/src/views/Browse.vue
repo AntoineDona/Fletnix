@@ -3,11 +3,7 @@
     <div class="search">
       <h1>Rechercher</h1>
       <div class="search_bar">
-        <input
-          @keyup.enter="onChange(movieName)"
-          v-model="movieName"
-          placeholder="Movie Research"
-        />
+        <input v-model="movieName" placeholder="Movie Research" />
         <button type="submit" class="search-btn">
           <i class="fas fa-search"></i>
         </button>
@@ -93,9 +89,7 @@ export default {
     },
     displayDefault: function () {
       axios
-        .get(
-          `http://localhost:3000/movies/?adult=false&sort_by=popularity&limit=20&status=Released`
-        )
+        .get(`http://localhost:3000/movies/default`)
         .then((response) => {
           this.movies = response.data;
           console.log("premier if");
