@@ -2,6 +2,28 @@
   <div class="film" v-if="movie !== null">
     <div class="affiche">
       <img :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" />
+      <div class="like-dislike">
+        <button @click="updateLike(1)" class="like">
+          <i
+            v-if="like == 0 || like == -1"
+            class="far fa-thumbs-up"
+            id="light-like"
+          ></i>
+          <i v-else-if="like == 1" class="fas fa-thumbs-up" id="dark-like"></i>
+        </button>
+        <button @click="updateLike(-1)" class="dislike">
+          <i
+            v-if="like == 0 || like == 1"
+            class="far fa-thumbs-down"
+            id="light-dislike"
+          ></i>
+          <i
+            v-else-if="like == -1"
+            class="fas fa-thumbs-down"
+            id="dark-dislike"
+          ></i>
+        </button>
+      </div>
     </div>
     <div class="aside">
       <h1 :title="movie.name">
@@ -15,14 +37,20 @@
       <div class="sous_infos">
         <h3>{{ formatDate(new Date(movie.release_date), "d MMMM yyyy") }}</h3>
         <div class="separator"></div>
+        <h3 style="margin-right: 0.7rem">Genres:</h3>
         <div class="genres" v-for="genre of movie.genres" :key="genre.id">
           <h3>
             {{ genre.name }}
           </h3>
-          <div class="separator"></div>
         </div>
-        <h3 class="duree">{{ timeConvert(movie.runtime) }}</h3>
-        <div class="separator"></div>
+        <div v-if="movie.runtime !== 0" class="separator"></div>
+        <h3 v-if="movie.runtime !== 0" class="duree">
+          {{ timeConvert(movie.runtime) }}
+        </h3>
+        <div v-if="movie.vote_average !== 0" class="separator"></div>
+        <h3 v-if="movie.vote_average !== 0" class="duree">
+          Note: {{ movie.vote_average }} /10
+        </h3>
       </div>
       <div class="description">
         <h2>Synopsis</h2>
@@ -45,6 +73,7 @@ export default {
   data: function () {
     return {
       movie: null,
+      like: 0,
     };
   },
   methods: {
@@ -52,7 +81,7 @@ export default {
       return format(myDate, Dateformat, { locale: fr });
     },
     fetchMovieDetails: function () {
-      axios
+      return axios
         .get(`http://localhost:3000/movies/movie?id=${this.$route.params.id}`)
         .then((response) => {
           this.movie = response.data;
@@ -64,15 +93,55 @@ export default {
     },
     timeConvert: function (n) {
       var num = n;
-      console.log(n);
       var hours = num / 60;
       var rhours = Math.floor(hours);
       var minutes = (hours - rhours) * 60;
       var rminutes = Math.round(minutes);
       return rhours + " h " + rminutes;
     },
+    updateLike: function (like) {
+      //update database
+      //if like = prev_like -> on met 0: unlike
+      //Sinon, newlike_id prend la valeur 1 (dislike) si false et 2 (like) sinon
+      axios
+        .post(
+          `http://localhost:3000/stats/like?like=` +
+            like +
+            `&movie_id=${this.$route.params.id}`
+        )
+        .then(() => {
+          this.like = like;
+          console.log(this.like);
+        })
+        .catch((error) => {
+          this.moviesLoadingError = "An error occured while fetching movies.";
+          console.error(error);
+        });
+    },
+    getLike: function () {
+      //au lancement de la page on affiche le like
+      axios
+        .get(
+          `http://localhost:3000/stats?movie_id=${this.$route.params.id}&param=like`
+        )
+        .then((response) => {
+          console.log(response.data.like);
+          if (response.data.like == undefined) {
+            console.log("pas encore défini");
+            this.like = 0;
+          } else {
+            console.log("déjà défini, on affiche");
+            this.like = response.data.like;
+          }
+        })
+        .catch((error) => {
+          this.moviesLoadingError = "An error occured while fetching movies.";
+          console.error(error);
+        });
+    },
   },
   created() {
+    this.getLike();
     this.fetchMovieDetails();
   },
 };
@@ -84,8 +153,8 @@ export default {
 .film {
   display: flex;
   width: 80vw;
-  margin: auto;
-  height: 37rem;
+  margin: 3rem auto;
+  height: 31rem;
   justify-content: space-around;
   align-items: center;
   background-color: #152d44;
@@ -93,6 +162,34 @@ export default {
   transition: all 0.2s ease;
   overflow: hidden;
   text-align: left;
+}
+
+.affiche {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  max-width: 20rem;
+  align-self: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.affiche img {
+  max-width: 100%;
+  max-height: 25rem;
+}
+
+.like-dislike {
+  display: flex;
+  color: white;
+  width: 100%;
+  height: 3rem;
+}
+
+.like-dislike button {
+  width: 50%;
+  font-size: 1.4rem;
 }
 
 .aside {
@@ -111,21 +208,6 @@ export default {
 
 .sous_infos h3 {
   margin: unset;
-}
-
-.affiche {
-  display: flex;
-  border-radius: 1rem;
-  flex-basis: 30%;
-  height: 100%;
-  align-self: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.affiche img {
-  width: 100%;
-  border-radius: 1rem;
 }
 
 .description {
